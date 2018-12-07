@@ -1,6 +1,8 @@
 variable "region" {}
 variable "profile" {}
-variable "instance_type" {}
+variable "instance_type" {
+	type = "map"
+}
 variable "my_ami" {
 	type = "map"
 }
@@ -13,12 +15,21 @@ provider "aws" {
 	profile = "terraform"
 }
 
+terraform {
+   backend "s3" {
+	region = "us-east-1"
+        bucket = "axiodevelopmentbucket"
+        key = "state_loc/terraform/env/test2/terraform.tfstate"
+        profile = "terraform"
+}
+}
+
 data "terraform_remote_state""aws_global" {
   	backend = "s3"
 	config {
     		region = "us-east-1"
     		bucket = "axiodevelopmentbucket"
-    		key = "state_loc/terraform/env/${var.name}/terraform.tfstate"
+    		key = "state_loc/terraform/env/test2/terraform.tfstate"
     		profile = "${var.profile}"
   }
 }
