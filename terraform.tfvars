@@ -1,7 +1,7 @@
-region = "us-east-1"
+region = "us-east-2"
 
 profile = "terraform"
-instance_type = "t1.micro"
+instance_type = "t2.micro"
 
 my_ami = {
             us-east-1 ="ami-009d6802948d06e52"
@@ -9,4 +9,5 @@ my_ami = {
 }
 
 key_name = "S3FS"
+name = "test"
 
