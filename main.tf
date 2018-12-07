@@ -1,13 +1,3 @@
-variable "region" {}
-variable "profile" {}
-variable "instance_type" {
-	type = "map"
-}
-variable "my_ami" {
-	type = "map"
-}
-variable "key_name"  {}
-variable "name" {}
 
 provider "aws" {
 	region = "${var.region}"
@@ -34,12 +24,11 @@ data "terraform_remote_state""aws_global" {
   }
 }
 
-resource "aws_instance"
-"web" {
-	ami = "${lookup(var.my_ami, var.region)}"
-	instance_type = "${var.instance_type}"
-	tags {
-		Name = "Test_Terraform_A"
-	}
-	key_name = "${var.key_name}"
+module "ec2" {
+   source = "./modules/ec2"
+   	region = "${var.region}"
+   	my_ami = "${lookup(var.my_ami, var.region)}"
+   	instance_type = "${lookup(var.instance_type, var.region)}"
+   	key_name = "${var.key_name}"
 }
+

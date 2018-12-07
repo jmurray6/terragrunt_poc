@@ -1,5 +1,3 @@
-region = "us-east-2"
-
 profile = "terraform"
 instance_type = {
 	us-east-2 = "t2.micro"
